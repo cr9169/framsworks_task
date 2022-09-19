@@ -7,6 +7,8 @@ import "./inputsStyles.css";
 
 const Inputs: React.FC = () => {
 
+    const [index, setIndex] = useState<number>()
+    const [task, setTask] = useState<ITask>(); 
     const [taskList, setTaskList] = useState<ITask[]>([]);
 
     const submitHandler = (e: any) => {
@@ -14,6 +16,8 @@ const Inputs: React.FC = () => {
         const {taskName, taskDescription} = e.target;
         console.log(e.target)
         setTaskList(taskList => taskList?.concat({name: taskName.value , description: taskDescription.value, id: Date.now(), isDone: false}));
+        setTask(({name: taskName.value , description: taskDescription.value, id: Date.now(), isDone: false}));
+        setIndex(taskList.length);
     }
 
     return ( <div>
@@ -26,7 +30,7 @@ const Inputs: React.FC = () => {
             </div>
             <input  type="submit" name="submit" id='submit'/>
         </form>
-        <CRDTask taskList={taskList!} setTaskList={setTaskList}/>
+        <CRDTask taskList={taskList!} setTaskList={setTaskList} index={index!} task={task!}/>
     </div> );
 }
 
