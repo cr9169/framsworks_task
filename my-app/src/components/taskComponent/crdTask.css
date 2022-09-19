@@ -1,0 +1,10 @@
+#crd-task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 5vh;
+}
+
+.p {
+    margin-right: 4vh;
+}

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import CRDTask from "../../components/taskComponent/crdTask";
+import Inputs from "../../components/taskComponent/inputs";
+import Task from "../../interfaces/Task";
 
 // Task will be component inside addTask component
 const CRDTaskPage: React.FC = () => {
-    return <div>
+    return ( <div>
         <div></div>
-        <CRDTask/>
-        </div> 
+        <Inputs/>
+        </div> )
 }
 
 export default CRDTaskPage;

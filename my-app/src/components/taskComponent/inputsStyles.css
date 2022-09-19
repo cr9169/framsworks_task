@@ -1,0 +1,13 @@
+#inputs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 5vh;
+}
+
+#submit {
+    margin-top: 3vh;
+    font-size: large;
+    color: blue;
+    background-color: darkgrey;
+}
