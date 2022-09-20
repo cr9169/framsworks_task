@@ -9,8 +9,8 @@ const Inputs: React.FC = () => {
     const [taskList, setTaskList] = useState<ITask[]>([]);
     const [isEdit, setIsEdit] = useState<boolean>(false); 
     const [ID, setID] = useState<string>();     
-    const [indexToUpdate, setIndexToUpdate] = useState<number>(0);
-
+    const [val, setVal] = useState<string>();
+    let input = ""
     /* const isIdExists = (id: string): boolean => {
         let isExists: boolean = false;
         taskList.forEach((task: ITask) => {
@@ -23,7 +23,6 @@ const Inputs: React.FC = () => {
         let newTask: ITask;
         e.preventDefault();
         const {taskName, taskDescription} = e.target;
-        console.log(e.target)
         if(!isEdit)
         {
             newTask = {name: taskName.value , description: taskDescription.value, id: uuid()};
@@ -33,31 +32,32 @@ const Inputs: React.FC = () => {
         else
         {
             taskList!.map((task: ITask, index: number) => {
-                if(task.id == ID && indexToUpdate)
+                if(task.id == ID)
                 {
                     newTask = {name: taskName.value , description: taskDescription.value, id: ID};
-                    const newTaskList: ITask[] = taskList;
-                    newTaskList[indexToUpdate] = newTask;
+                    let newTaskList: ITask[] = taskList;
+                    newTaskList[index] = newTask;
                     setTaskList(newTaskList);
-                    setIsEdit(!isEdit);
                 }
             });
+            setIsEdit(!isEdit);
+            setID("")
         }
     }
 
     return ( <div>
-        <form onSubmit={submitHandler}>
+        <form id="#myform" onSubmit={submitHandler}>
             <div id='inputs'>
                 <span>Name:</span>
                 <input type="text" name="taskName" />
                 <span>Description:</span>
                 <input type="text" name="taskDescription"/>
                 <span>ID:</span>
-                <input disabled={!isEdit} type="text" name="taskID"/>
+                <input disabled={!isEdit} type="text" name="taskID" value={ID} onChange={event => setID(event.target.value)}/>
             </div>
             <input  type="submit" name="submit" id='submit'/>
         </form>
-        <CRDTask taskList={taskList!} setTaskList={setTaskList} isEdit={isEdit} setIsEdit={setIsEdit} indexToUpdate={indexToUpdate} ID={ID!} setID={setID} setIndexToUpdate={setIndexToUpdate}/>
+        <CRDTask taskList={taskList!} setTaskList={setTaskList} isEdit={isEdit} setIsEdit={setIsEdit} ID={ID!} setID={setID}/>
     </div> );
 }
 
