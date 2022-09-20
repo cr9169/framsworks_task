@@ -7,7 +7,9 @@ import { v4 as uuid } from 'uuid';
 const Inputs: React.FC = () => {
 
     const [taskList, setTaskList] = useState<ITask[]>([]);
-    const [isEdit, setIsEdit] = useState<boolean>(false);
+    const [isEdit, setIsEdit] = useState<boolean>(false); 
+    const [ID, setID] = useState<string>();     
+    const [indexToUpdate, setIndexToUpdate] = useState<number>(0);
 
     /* const isIdExists = (id: string): boolean => {
         let isExists: boolean = false;
@@ -18,10 +20,29 @@ const Inputs: React.FC = () => {
     } */ 
 
     const submitHandler = (e: any) => {
+        let newTask: ITask;
         e.preventDefault();
         const {taskName, taskDescription} = e.target;
         console.log(e.target)
-        setTaskList(taskList => taskList?.concat({name: taskName.value , description: taskDescription.value, id: uuid()}));
+        if(!isEdit)
+        {
+            newTask = {name: taskName.value , description: taskDescription.value, id: uuid()};
+            setTaskList(taskList => taskList?.concat(newTask));
+        }
+
+        else
+        {
+            taskList!.map((task: ITask, index: number) => {
+                if(task.id == ID && indexToUpdate)
+                {
+                    newTask = {name: taskName.value , description: taskDescription.value, id: ID};
+                    const newTaskList: ITask[] = taskList;
+                    newTaskList[indexToUpdate] = newTask;
+                    setTaskList(newTaskList);
+                    setIsEdit(!isEdit);
+                }
+            });
+        }
     }
 
     return ( <div>
@@ -32,11 +53,11 @@ const Inputs: React.FC = () => {
                 <span>Description:</span>
                 <input type="text" name="taskDescription"/>
                 <span>ID:</span>
-                <input disabled={isEdit} type="text" name="taskID"/>
+                <input disabled={!isEdit} type="text" name="taskID"/>
             </div>
             <input  type="submit" name="submit" id='submit'/>
         </form>
-        <CRDTask taskList={taskList!} setTaskList={setTaskList} isEdit={isEdit} setIsEdit={setIsEdit}/>
+        <CRDTask taskList={taskList!} setTaskList={setTaskList} isEdit={isEdit} setIsEdit={setIsEdit} indexToUpdate={indexToUpdate} ID={ID!} setID={setID} setIndexToUpdate={setIndexToUpdate}/>
     </div> );
 }
 

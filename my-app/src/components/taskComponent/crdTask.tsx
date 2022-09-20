@@ -7,10 +7,14 @@ interface IProps{
     taskList: ITask[],
     setTaskList: React.Dispatch<React.SetStateAction<ITask[]>>,
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>,
-    isEdit: boolean
+    isEdit: boolean,
+    setIndexToUpdate:React.Dispatch<React.SetStateAction<number>>,
+    indexToUpdate: number,
+    ID: string,
+    setID: React.Dispatch<React.SetStateAction<string | undefined>>
 }
 
-const CRDTask: React.FC<IProps> = ({taskList, setTaskList, setIsEdit, isEdit}) => {
+const CRDTask: React.FC<IProps> = ({taskList, setTaskList, setIsEdit, isEdit, indexToUpdate, setIndexToUpdate, ID, setID}) => {
     
     const deleteTask = (index: number): void => {
         const newTaskList = taskList;
@@ -19,9 +23,13 @@ const CRDTask: React.FC<IProps> = ({taskList, setTaskList, setIsEdit, isEdit}) =
     }
 
     const handleEdit = (id: string): void => {
-        // if input id == task.id => update 
-        // take value from inputs in the other component and set in taskList 
-    }
+        
+        if(indexToUpdate == 0)
+            setIndexToUpdate(1);
+        else
+            setIndexToUpdate(indexToUpdate+1)
+        setID(taskList[indexToUpdate].id);
+}
 
     return <div id="crd-task">
         <div>{taskList!.map((task: ITask, index: number) =>
@@ -31,6 +39,7 @@ const CRDTask: React.FC<IProps> = ({taskList, setTaskList, setIsEdit, isEdit}) =
             <input onClick={() => deleteTask(index)} type="button" value="delete"></input>
             <p>{task.name}</p>
             <p>{task.description}</p>
+            <p>{task.id}</p>
             </div>)}        
         </div>
     </div>
