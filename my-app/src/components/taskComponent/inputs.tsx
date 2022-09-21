@@ -3,21 +3,26 @@ import ITask from '../../interfaces/Task';
 import CRDTask from './crdTask';
 import "./inputsStyles.css";
 import { v4 as uuid } from 'uuid';
+import { useNavigate } from 'react-router';
 
-const Inputs: React.FC = () => {
+interface IProps {
+    taskList: ITask[],
+    setTaskList: React.Dispatch<React.SetStateAction<ITask[]>>
+}
 
-    const [taskList, setTaskList] = useState<ITask[]>([]);
+const Inputs: React.FC<IProps> = ({taskList, setTaskList}) => {
+
     const [isEdit, setIsEdit] = useState<boolean>(false); 
     const [ID, setID] = useState<string>();     
 
-    const submitHandler = (e: any) => {
+    const submitHandler = (e: any): void => {
         let newTask: ITask;
         e.preventDefault();
         const {taskName, taskDescription} = e.target;
         if(!isEdit)
         {
             newTask = {name: taskName.value , description: taskDescription.value, id: uuid()};
-            setTaskList(taskList => taskList?.concat(newTask));
+            setTaskList(prevTaskList => prevTaskList?.concat(newTask));
         }
 
         else

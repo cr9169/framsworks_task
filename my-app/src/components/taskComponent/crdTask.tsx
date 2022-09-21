@@ -26,8 +26,15 @@ const CRDTask: React.FC<IProps> = ({taskList, setTaskList, setIsEdit, isEdit, ID
     return <div id="crd-task">
         <div>{taskList!.map((task: ITask, index: number) =>
             <div>
-            <input onClick={() => { if(!isEdit) setIsEdit(!isEdit); else handleEdit(task.id); 
-            } } type="button" value="update"></input>
+            {task.id == taskList[0].id ?
+                (
+                <><input onClick={() => {
+                            if (!isEdit)
+                                setIsEdit(!isEdit); else
+                                handleEdit(task.id);
+                        } } type="button" value="update"></input><br /><br /></>
+                ) : (<br />)
+            }
             <input onClick={() => deleteTask(index)} disabled={isEdit} type="button" value="delete"></input>
             <p>{task.name}</p>
             <p>{task.description}</p>
