@@ -1,8 +1,6 @@
 import React from "react";
 import ITask from "../../interfaces/Task";
-import { useNavigate } from "react-router";
 import "./crdTask.css";
-
 
 interface IProps{
     taskList: ITask[],
@@ -12,7 +10,7 @@ interface IProps{
 const TaskList: React.FC<IProps> = ({taskList, setTaskList}) => {
 
     return <div id="crd-task">
-        <div>{taskList!.map((task: ITask, index: number) =>
+        <div>{taskList!.map((task: ITask) =>
             <div>
             <p>{task.name}</p>
             <p>{task.description}</p>

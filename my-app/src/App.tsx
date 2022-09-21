@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ITask from "./interfaces/Task";
-import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import './App.css';
 import Inputs from "./components/taskComponent/inputs";
 import TaskList from "./components/taskComponent/taskList";
@@ -22,8 +22,6 @@ function App() {
           <Route path="/list" element={<TaskList taskList={taskList} setTaskList={setTaskList}/>}/>
         </Routes>
       </BrowserRouter>
-      {/* <Inputs taskList={taskList} setTaskList={setTaskList}/>
-      <TaskList taskList={taskList} setTaskList={setTaskList}/> */}
     </div>
   );
 }

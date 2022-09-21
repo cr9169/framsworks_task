@@ -3,7 +3,6 @@ import ITask from '../../interfaces/Task';
 import CRDTask from './crdTask';
 import "./inputsStyles.css";
 import { v4 as uuid } from 'uuid';
-import { useNavigate } from 'react-router';
 
 interface IProps {
     taskList: ITask[],
@@ -36,7 +35,7 @@ const Inputs: React.FC<IProps> = ({taskList, setTaskList}) => {
                     setTaskList(newTaskList);
                 }
             });
-            setIsEdit(!isEdit);
+            setIsEdit(false);
             setID("");
         }
     }
@@ -48,10 +47,10 @@ const Inputs: React.FC<IProps> = ({taskList, setTaskList}) => {
                 <input type="text" name="taskName" />
                 <span>Description:</span>
                 <input type="text" name="taskDescription"/>
-                <span>ID:</span>
-                <input disabled={!isEdit} type="text" name="taskID" value={ID} onChange={event => setID(event.target.value)}/>
+                {/* <span>ID:</span>
+                <input disabled={!isEdit} type="text" name="taskID" value={ID} onChange={event => setID(event.target.value)}/> */}
             </div>
-            <input  type="submit" name="submit" id='submit'/>
+            <input type="submit" name="submit" id='submit'/>
         </form>
         <CRDTask taskList={taskList!} setTaskList={setTaskList} isEdit={isEdit} setIsEdit={setIsEdit} ID={ID!} setID={setID}/>
     </div> );
