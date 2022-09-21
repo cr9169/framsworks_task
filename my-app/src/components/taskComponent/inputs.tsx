@@ -9,15 +9,6 @@ const Inputs: React.FC = () => {
     const [taskList, setTaskList] = useState<ITask[]>([]);
     const [isEdit, setIsEdit] = useState<boolean>(false); 
     const [ID, setID] = useState<string>();     
-    const [val, setVal] = useState<string>();
-    let input = ""
-    /* const isIdExists = (id: string): boolean => {
-        let isExists: boolean = false;
-        taskList.forEach((task: ITask) => {
-            id == task.id ? isExists = true : isExists = false;
-        })
-        return isExists;
-    } */ 
 
     const submitHandler = (e: any) => {
         let newTask: ITask;
@@ -41,7 +32,7 @@ const Inputs: React.FC = () => {
                 }
             });
             setIsEdit(!isEdit);
-            setID("")
+            setID("");
         }
     }
 

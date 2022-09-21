@@ -1,7 +1,5 @@
-import React, { useState } from "react";
-import { setConstantValue } from "typescript";
+import React from "react";
 import ITask from "../../interfaces/Task";
-// import popup from "./popupComponent/popup"
 import "./crdTask.css";
 
 interface IProps{
@@ -28,7 +26,7 @@ const CRDTask: React.FC<IProps> = ({taskList, setTaskList, setIsEdit, isEdit, ID
     return <div id="crd-task">
         <div>{taskList!.map((task: ITask, index: number) =>
             <div>
-            <input onClick={() => { if(!isEdit) setIsEdit(!isEdit); else handleEdit(task.id); // take value from inputs in the other component and set in taskList 
+            <input onClick={() => { if(!isEdit) setIsEdit(!isEdit); else handleEdit(task.id); 
             } } type="button" value="update"></input>
             <input onClick={() => deleteTask(index)} disabled={isEdit} type="button" value="delete"></input>
             <p>{task.name}</p>
